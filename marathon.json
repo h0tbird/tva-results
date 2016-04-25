@@ -10,7 +10,7 @@
     "owner": "tva",
     "HAPROXY_GROUP": "external",
     "HAPROXY_0_STICKY": "true",
-    "HAPROXY_0_VHOST": "results.foo.com"
+    "HAPROXY_0_VHOST": "results.thevotingapp.com"
   },
   "container": {
     "type": "DOCKER",
