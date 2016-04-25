@@ -9,6 +9,7 @@
   "labels": {
     "owner": "tva",
     "HAPROXY_GROUP": "external",
+    "HAPROXY_0_STICKY": true,
     "HAPROXY_0_VHOST": "results.foo.com"
   },
   "container": {
