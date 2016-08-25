@@ -15,7 +15,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "softonic/tva-results:latest",
+      "image": "internal-registry-sys.marathon:5000/tva/results:latest",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 80, "hostPort": 0 }
