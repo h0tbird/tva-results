@@ -21,24 +21,28 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-async.retry(
-  {times: 1000, interval: 1000},
-  function(callback) {
-    pg.connect('postgres://postgres@marathon-lb:10014/postgres', function(err, client, done) {
+connect();
+
+function connect() {
+  async.retry(
+    {times: 1000, interval: 1000},
+    function(callback) {
+      pg.connect('postgres://postgres@marathon-lb:10014/postgres', function(err, client, done) {
+        if (err) {
+          console.error("Waiting for db");
+        }
+        callback(err, client);
+      });
+    },
+    function(err, client) {
       if (err) {
-        console.error("Waiting for db");
+        return console.err("Giving up");
       }
-      callback(err, client);
-    });
-  },
-  function(err, client) {
-    if (err) {
-      return console.err("Giving up");
+      console.log("Connected to db");
+      getVotes(client);
     }
-    console.log("Connected to db");
-    getVotes(client);
-  }
-);
+  );
+}
 
 function getVotes(client) {
   client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
