@@ -11,29 +11,38 @@
     "HAPROXY_GROUP": "external",
     "HAPROXY_0_STICKY": "true",
     "HAPROXY_0_VHOST": "results.thevotingapp.com",
-    "HAPROXY_DEPLOYMENT_GROUP": "tva_results",
-    "HAPROXY_DEPLOYMENT_ALT_PORT": "10017"
+    "HAPROXY_DEPLOYMENT_GROUP": "tva_results"
+  },
+  "ipAddress": {
+    "networkName": "devel",
+    "labels": {
+      "app": "results",
+      "group": "tva"
+    },
+    "discovery": {
+      "ports": [
+        { "number": 80, "name": "results", "protocol": "tcp" }
+      ]
+    }
   },
   "container": {
-    "type": "DOCKER",
+    "type": "MESOS",
     "docker": {
       "image": "quay.io/kato/tva-results:latest",
-      "network": "BRIDGE",
-      "portMappings": [
-        { "containerPort": 80, "hostPort": 0, "servicePort": 10016 }
-      ],
-      "privileged": false,
-      "parameters": [
-        { "key": "env", "value": "PORT=80" }
-      ],
       "forcePullImage": true
-    }
+    },
+    "portMappings": [
+      { "servicePort": 10016 }
+    ]
+  },
+  "env": {
+    "PORT": "80"
   },
   "healthChecks": [
     {
       "path": "/",
-      "protocol": "HTTP",
-      "portIndex": 0,
+      "protocol": "MESOS_HTTP",
+      "port": 80,
       "gracePeriodSeconds": 120,
       "intervalSeconds": 30,
       "timeoutSeconds": 5,
