@@ -1,0 +1,14 @@
+- apiVersion: v1
+  kind: policy
+  metadata:
+    name: tva-results
+  spec:
+    selector: app == 'results'
+    ingress:
+    - action: allow
+      protocol: tcp
+      destination:
+        ports:
+        - 80
+    egress:
+    - action: allow
