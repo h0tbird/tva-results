@@ -3,7 +3,7 @@
   metadata:
     name: tva-results
   spec:
-    selector: app == 'results'
+    selector: group == 'tva' && app == 'results'
     ingress:
     - action: allow
       protocol: tcp
