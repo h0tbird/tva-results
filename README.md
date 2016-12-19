@@ -3,7 +3,7 @@
 
 # tva-results
 
-[![Build Status](https://travis-ci.org/katosys/tva-results.svg?branch=master)](https://travis-ci.org/katosys/tva-results)
+[![Build Status](https://travis-ci.org/h0tbird/tva-results.svg?branch=master)](https://travis-ci.org/h0tbird/tva-results)
 
 Web application to show voting results (node js)
 
