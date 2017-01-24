@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-results
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: results
+    spec:
+      containers:
+      - name: results
+        image: quay.io/h0tbird/tva-results:latest
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: results-tva
+spec:
+  ports:
+    - name: results
+      port: 80
+      targetPort: 80
+  selector:
+    app: results
+  type: LoadBalancer
