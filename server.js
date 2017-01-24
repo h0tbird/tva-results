@@ -21,34 +21,29 @@ io.sockets.on('connection', function (socket) {
   });
 });
 
-connect();
-
-function connect() {
-  async.retry(
-    {times: 1000, interval: 1000},
-    function(callback) {
-      pg.connect('postgres://postgres@postgres-tva:5432/postgres', function(err, client, done) {
-        if (err) {
-          console.error("Waiting for db");
-        }
-        callback(err, client);
-      });
-    },
-    function(err, client) {
+async.retry(
+  {times: 1000, interval: 1000},
+  function(callback) {
+    pg.connect('postgres://postgres@postgres-tva:5432/postgres', function(err, client, done) {
       if (err) {
-        return console.err("Giving up");
+        console.error("Waiting for db");
       }
-      console.log("Connected to db");
-      getVotes(client);
+      callback(err, client);
+    });
+  },
+  function(err, client) {
+    if (err) {
+      return console.err("Giving up");
     }
-  );
-}
+    console.log("Connected to db");
+    getVotes(client);
+  }
+);
 
 function getVotes(client) {
   client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
     if (err) {
       console.error("Error performing query: " + err);
-      connect();
     } else {
       var votes = collectVotesFromResult(result);
       io.sockets.emit("scores", JSON.stringify(votes));
