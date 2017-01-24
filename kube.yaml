@@ -13,6 +13,7 @@ spec:
       containers:
       - name: results
         image: quay.io/h0tbird/tva-results:latest
+        imagePullPolicy: Always
 ---
 kind: Service
 apiVersion: v1
