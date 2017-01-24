@@ -34,3 +34,4 @@ spec:
   selector:
     app: results
   type: LoadBalancer
+  sessionAffinity: ClientIP
