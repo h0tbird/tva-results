@@ -9,9 +9,11 @@
   "labels": {
     "owner": "tva",
     "HAPROXY_GROUP": "external",
+    "HAPROXY_DEPLOYMENT_GROUP": "tva_results",
+    "HAPROXY_0_FRONTEND_HEAD": "",
+    "HAPROXY_0_FRONTEND_BACKEND_GLUE": "",
     "HAPROXY_0_STICKY": "true",
-    "HAPROXY_0_VHOST": "results.thevotingapp.com",
-    "HAPROXY_DEPLOYMENT_GROUP": "tva_results"
+    "HAPROXY_0_VHOST": "results.thevotingapp.com"
   },
   "ipAddress": {
     "networkName": "devel",
