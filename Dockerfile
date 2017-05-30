@@ -13,4 +13,4 @@ ADD . /app
 ENV PORT 80
 EXPOSE 80
 
-CMD ["nodemon", "-L", "server.js"]
+CMD ["node", "server.js"]
